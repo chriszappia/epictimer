@@ -43,22 +43,32 @@ export class Timer extends React.Component<IProps, IState> {
 
     private stop = () => {
         clearInterval(this.timer!);
+        this.setState({isRunning: false});
     };
 
     private start = () => {
-        this.timer = setInterval(() => {
-            this.tick();
-        }, Timer.tickLength)
+        if (!this.state.isRunning) {
+            this.setState({isRunning: true});
+            this.timer = setInterval(() => {
+                this.tick();
+            }, Timer.tickLength)
+        };
+    };
+
+    private reset = () => {
+        this.stop();
+        this.setState({timeRemaining: this.props.initialTime});
     };
 
 
     render() {
         return (
             <div>
-                <span>hello world {this.state.timeRemaining}</span>
+                <span>{this.state.timeRemaining}</span>
                 <span>
-                    <button onClick={this.start}>Start Timer</button>
-                    <button onClick={this.stop}>Stop Timer</button>
+                    <button onClick={this.start}>Start</button>
+                    <button onClick={this.stop}>Stop</button>
+                    <button onClick={this.reset}>Reset</button>
                 </span>
             </div> 
         );
