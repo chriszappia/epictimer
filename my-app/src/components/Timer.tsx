@@ -1,5 +1,6 @@
 import React from 'react';
 import { runInThisContext } from 'vm';
+import { Stage, Layer,Text, Rect, Group } from 'react-konva';
 
 
 // TODOs
@@ -17,7 +18,7 @@ export interface IState {
 
 export class Timer extends React.Component<IProps, IState> {
 
-    private static tickLength = 1000;
+    private static readonly tickLength = 1000;
 
     private timer: NodeJS.Timeout | null;
 
@@ -48,19 +49,33 @@ export class Timer extends React.Component<IProps, IState> {
     private start = () => {
         this.timer = setInterval(() => {
             this.tick();
+            console.log(this.state.timeRemaining);
         }, Timer.tickLength)
     };
 
 
     render() {
         return (
-            <div>
-                <span>hello world {this.state.timeRemaining}</span>
-                <span>
-                    <button onClick={this.start}>Start Timer</button>
-                    <button onClick={this.stop}>Stop Timer</button>
-                </span>
-            </div> 
-        );
+            <Group>
+            <Text text={this.state.timeRemaining.toString()} />
+            <Rect            x={20}
+            y={20}
+            width={50}
+            height={50}
+            fill={'red'}
+            shadowBlur={5}
+            onClick={this.start}
+          /> 
+          </Group>
+            );
+            // <div>
+                // {/* <span>hello world {this.state.timeRemaining}</span> */}
+                // {/* <Text>Hello World {this.state.timeRemaining}</Text> */}
+                // {/* <span> */}
+                    // {/* <button onClick={this.start} Text={"aaa"} />  */}
+                    // {/*</span>Start Timer</button> */}
+                    // {/* <button onClick={this.stop}>Stop Timer</button> */}
+                // {/* </span> */}
+            // </div> 
     }
 }
