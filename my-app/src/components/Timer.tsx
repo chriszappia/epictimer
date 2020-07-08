@@ -8,6 +8,7 @@ import { runInThisContext } from 'vm';
 export interface IProps  {
     initialTime: number,
     running: boolean,
+    className: string,
 };
 
 export interface IState {
@@ -17,7 +18,7 @@ export interface IState {
 
 export class Timer extends React.Component<IProps, IState> {
 
-    private static tickLength = 1000;
+    private static readonly tickLength = 1000;
 
     private timer: NodeJS.Timeout | null;
 
@@ -63,13 +64,13 @@ export class Timer extends React.Component<IProps, IState> {
 
     render() {
         return (
-            <div>
-                <span>{this.state.timeRemaining}</span>
-                <span>
+            <div className={this.props.className}>
+                <div>{this.state.timeRemaining}</div>
+                <div>
                     <button onClick={this.start}>Start</button>
                     <button onClick={this.stop}>Stop</button>
                     <button onClick={this.reset}>Reset</button>
-                </span>
+                </div>
             </div> 
         );
     }
