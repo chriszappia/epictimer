@@ -9,6 +9,8 @@ export interface IProps  {
     initialTime: number,
     running: boolean,
     className: string,
+    onComplete: () => void,
+    onReset: () => void,
 };
 
 export interface IState {
@@ -39,6 +41,7 @@ export class Timer extends React.Component<IProps, IState> {
           });
         } else {
           clearInterval(this.timer!);
+          this.props.onComplete();
         }
       };
 
@@ -59,6 +62,7 @@ export class Timer extends React.Component<IProps, IState> {
     private reset = () => {
         this.stop();
         this.setState({timeRemaining: this.props.initialTime});
+        this.props.onReset();
     };
 
 
