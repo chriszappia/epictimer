@@ -17,24 +17,31 @@ function getRandomPostTimerAction(): PostTimerAction {
 function App() {
 
   const [currentPostTimerAction, setCurrentPostTimerAction] = useState<PostTimerAction>(getRandomPostTimerAction());
+  const [postTimerElement, setPostTimerElement] = useState<JSX.Element | null>(null); 
 
   const onTimerComplete = () => {
-    currentPostTimerAction.onTimerComplete();
+    setPostTimerElement(currentPostTimerAction.onTimerComplete());
   };
 
   const cleanupPostAction = () => {
     currentPostTimerAction.cleanup();
+    setPostTimerElement(null);
   }
 
   return (
     <div className="App">
-      <Timer initialTime={4}
-             running={false}
-             className={"centered top"} 
-             onComplete={onTimerComplete}
-             onReset={cleanupPostAction}
-             />
-      <div>On Complete: {currentPostTimerAction.getName()}</div>
+      <div>
+        <Timer initialTime={4}
+              running={false}
+              className={"centered top"} 
+              onComplete={onTimerComplete}
+              onReset={cleanupPostAction}
+              />
+        <div>On Complete: {currentPostTimerAction.getName()}</div>
+      </div>
+      <div className={"full centred bottom"}>
+          {postTimerElement === null ? "" : postTimerElement}
+      </div>
     </div>
   );
 }

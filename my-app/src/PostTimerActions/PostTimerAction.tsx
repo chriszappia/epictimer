@@ -13,7 +13,7 @@ export abstract class PostTimerAction {
     /**
      * What to do when the timer finishes.
      */
-    abstract onTimerComplete(): void;
+    abstract onTimerComplete(): JSX.Element | null;
 
     /**
      * Timer actions should clean up after themselves.
