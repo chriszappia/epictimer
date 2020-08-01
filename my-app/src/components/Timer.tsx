@@ -1,6 +1,5 @@
-import React from 'react';
-import { runInThisContext } from 'vm';
-
+import React, { useState } from 'react';
+import { EditableText } from '@blueprintjs/core'
 
 // TODOs
 // onTick callback
@@ -69,7 +68,12 @@ export class Timer extends React.Component<IProps, IState> {
     render() {
         return (
             <div className={this.props.className}>
-                <div>{this.state.timeRemaining}</div>
+                <div>
+                <TimerEditableText value={this.state.timeRemaining}
+                                   enabled={this.state.isRunning}
+                                   onChange={(newValue) => {this.setState({timeRemaining: parseInt(newValue)})}}
+                />
+                </div>
                 <div>
                     <button onClick={this.start}>Start</button>
                     <button onClick={this.stop}>Stop</button>
@@ -78,4 +82,27 @@ export class Timer extends React.Component<IProps, IState> {
             </div> 
         );
     }
+}
+
+
+export interface ITimerEditableTextProps {
+    value: number,
+    enabled: boolean,
+    onChange(newValue: string): void,
+}
+
+export function TimerEditableText(props: ITimerEditableTextProps) {
+    const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+        props.onChange(event.target.value);
+      }
+
+    return (
+        <span>
+        <input type='number'
+               disabled={props.enabled}
+               value={props.value.toString()}
+               onChange={handleChange}
+               min={0}/>
+        </span>
+    );
 }
