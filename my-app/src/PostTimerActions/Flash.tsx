@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { PostTimerAction } from "./PostTimerAction";
-import { cleanup } from '@testing-library/react';
 
 export class FlashAction extends PostTimerAction {
     private timer: NodeJS.Timeout | null;
@@ -21,24 +20,22 @@ export class FlashAction extends PostTimerAction {
 }
 
 
-export function FlashingDiv() {
+export interface IFlashingDivProps {
+    timer: NodeJS.Timeout | null;
+}
 
-    const [currentColour, setCurrentColour] = useState<string>("red"); 
-    const [timer] = useState<NodeJS.Timeout>(setInterval(() => {
-        tick();
-    }, 100));
+export function FlashingDiv() {
+    const [currentColour, setCurrentColour] = useState<string>('red'); 
 
     useEffect(() => {
-        return function cleanup() {
-            console.log("clearing timeout");
-            clearInterval(timer);
-        }
-    });
-
-
-    const tick = () => {
-        setCurrentColour(currentColour === 'red' ? 'white' : 'red');
-    };
+      const interval = setInterval(() => {
+            setCurrentColour(current => current === 'red' ? 'white' : 'red');
+        }, 100);
+      return () => {
+          // Cleanup
+          clearInterval(interval);
+      };
+    }, []);
 
     return (
         <div style={{backgroundColor: currentColour}} className={"full" } />
