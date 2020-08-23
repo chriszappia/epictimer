@@ -44,7 +44,7 @@ function App() {
                running={false}
                className={"centered top"} 
                onComplete={onTimerComplete}
-               onReset={cleanupPostAction}
+               cleanup={cleanupPostAction}
                />
         <div>
           On Complete:
