@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { PostTimerAction } from "./PostTimerAction";
+import { PostTimerAction } from "../PostTimerAction";
 
-export class FlashAction2 extends PostTimerAction {
+export class FlashAction extends PostTimerAction {
     private timer: NodeJS.Timeout | null;
 
     constructor() {
-        super("Flash blue");
+        super("Flash Red");
         this.timer = null;
     }
 
@@ -25,11 +25,11 @@ export interface IFlashingDivProps {
 }
 
 export function FlashingDiv() {
-    const [currentColour, setCurrentColour] = useState<string>('blue'); 
+    const [currentColour, setCurrentColour] = useState<string>('red'); 
 
     useEffect(() => {
       const interval = setInterval(() => {
-            setCurrentColour(current => current === 'blue' ? 'white' : 'blue');
+            setCurrentColour(current => current === 'red' ? 'white' : 'red');
         }, 100);
       return () => {
           // Cleanup

@@ -4,8 +4,8 @@ import './App.css';
 import { Timer } from './components/Timer';
 import { TimerCanvas } from './components/TimerCanvas';
 import { PostTimerAction } from './PostTimerActions/PostTimerAction';
-import { FlashAction } from './PostTimerActions/Flash';
-import { FlashAction2 } from './PostTimerActions/Flash2';
+import { FlashAction } from './PostTimerActions/FlashAction/Flash';
+import { FlashAction2 } from './PostTimerActions/FlashAction/Flash2';
 
 
 // TODO Delete 2nd FlashAction.
