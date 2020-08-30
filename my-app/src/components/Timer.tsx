@@ -70,10 +70,9 @@ export class Timer extends React.Component<IProps, IState> {
         return (
             <div className={this.props.className}>
                 <div>
-                <TimerEditableText value={this.state.timeRemaining}
-                                   secsRemaining={this.state.timeRemaining}
+                <TimerEditableText secsRemaining={this.state.timeRemaining}
                                    enabled={this.state.isRunning}
-                                   onChange={(newValue) => {this.setState({timeRemaining: parseInt(newValue)})}}
+                                   updateTimer={(newValue) => {this.setState({timeRemaining: newValue})}}
                 />
                 </div>
                 <div>
@@ -88,19 +87,20 @@ export class Timer extends React.Component<IProps, IState> {
 
 
 export interface ITimerEditableTextProps {
-    value: number, // TODO remove
     secsRemaining: number,
     enabled: boolean,
     // TODO update this to number func
-    onChange(newValue: string): void,
+    updateTimer(newValue: number): void,
 }
 
 export function TimerEditableText(props: ITimerEditableTextProps) {
-    const [totalSecs, setTotalSecs] = useState<number>(0); 
     const [inputMins, setInputMins] = useState<number>(0);
     const [editingMins, setEditingMins] = useState<boolean>(false);
     const [inputSecs, setInputSecs] = useState<number>(0);
     const [editingSecs, setEditingSecs] = useState<boolean>(false);
+
+    // TODO Constructor
+    // Need to set the initial inputMins and inputSecs
 
     const handleMinsChange = (newValue: string) => {
         setInputMins(parseInt(newValue));
@@ -108,11 +108,6 @@ export function TimerEditableText(props: ITimerEditableTextProps) {
     const handleSecsChange = (newValue: string) => {
         setInputSecs(parseInt(newValue));
     };
-
-    useEffect(() => {
-        setTotalSecs((inputMins * 60) + inputSecs);
-    }, [inputMins, inputSecs]);
-
 
     const getMins = (totalSeconds: number) => {
         return Math.floor(totalSeconds / 60);
@@ -127,8 +122,7 @@ export function TimerEditableText(props: ITimerEditableTextProps) {
         setEditingSecs(false);
         // Set the total time
         let totalSecs = (inputMins * 60) + inputSecs
-        setTotalSecs(totalSecs);
-        props.onChange(totalSecs.toString());
+        props.updateTimer(totalSecs);
         // Update the input mins + secs to the 'normalized', confirmed values.
         setInputMins(getMins(totalSecs));
         setInputSecs(getSecs(totalSecs));
