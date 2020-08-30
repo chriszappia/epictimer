@@ -39,10 +39,9 @@ function App() {
 
   return (
     <div className="App">
-      <div>
+      <div className={"centered top"}>
         <Timer initialTime={4}
                running={false}
-               className={"centered top"} 
                onComplete={onTimerComplete}
                cleanup={cleanupPostAction}
                />
