@@ -94,13 +94,20 @@ export interface ITimerEditableTextProps {
 }
 
 export function TimerEditableText(props: ITimerEditableTextProps) {
-    const [inputMins, setInputMins] = useState<number>(0);
+    // Defined early because we need them to get the initial state of input mins and secs
+    const getMins = (totalSeconds: number) => {
+        return Math.floor(totalSeconds / 60);
+    };
+    const getSecs = (totalSeconds: number) => {
+        return (totalSeconds % 60);
+    }
+    
+    // State stuff
+    const [inputMins, setInputMins] = useState<number>(getMins(props.secsRemaining));
     const [editingMins, setEditingMins] = useState<boolean>(false);
-    const [inputSecs, setInputSecs] = useState<number>(0);
+    const [inputSecs, setInputSecs] = useState<number>(getSecs(props.secsRemaining));
     const [editingSecs, setEditingSecs] = useState<boolean>(false);
 
-    // TODO Constructor
-    // Need to set the initial inputMins and inputSecs
 
     const handleMinsChange = (newValue: string) => {
         setInputMins(parseInt(newValue));
@@ -108,14 +115,6 @@ export function TimerEditableText(props: ITimerEditableTextProps) {
     const handleSecsChange = (newValue: string) => {
         setInputSecs(parseInt(newValue));
     };
-
-    const getMins = (totalSeconds: number) => {
-        return Math.floor(totalSeconds / 60);
-    };
-
-    const getSecs = (totalSeconds: number) => {
-        return (totalSeconds % 60);
-    }
 
     const updateTime = (newValue: string) => {
         setEditingMins(false);
