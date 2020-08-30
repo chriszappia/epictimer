@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { EditableText } from '@blueprintjs/core'
+import NumberFormat from 'react-number-format'
 
 // TODOs
 // onTick callback
@@ -33,7 +34,7 @@ export class Timer extends React.Component<IProps, IState> {
         this.timer = null;
     }
 
-    tick = () => {
+    private tick = () => {
         if (this.state.timeRemaining > 0) {
           this.setState({
             timeRemaining: this.state.timeRemaining - 1
@@ -70,6 +71,7 @@ export class Timer extends React.Component<IProps, IState> {
             <div className={this.props.className}>
                 <div>
                 <TimerEditableText value={this.state.timeRemaining}
+                                   secsRemaining={this.state.timeRemaining}
                                    enabled={this.state.isRunning}
                                    onChange={(newValue) => {this.setState({timeRemaining: parseInt(newValue)})}}
                 />
@@ -86,23 +88,75 @@ export class Timer extends React.Component<IProps, IState> {
 
 
 export interface ITimerEditableTextProps {
-    value: number,
+    value: number, // TODO remove
+    secsRemaining: number,
     enabled: boolean,
+    // TODO update this to number func
     onChange(newValue: string): void,
 }
 
 export function TimerEditableText(props: ITimerEditableTextProps) {
-    const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
-        props.onChange(event.target.value);
-      }
+    const [totalSecs, setTotalSecs] = useState<number>(0); 
+    const [inputMins, setInputMins] = useState<number>(0);
+    const [editingMins, setEditingMins] = useState<boolean>(false);
+    const [inputSecs, setInputSecs] = useState<number>(0);
+    const [editingSecs, setEditingSecs] = useState<boolean>(false);
+
+    const handleMinsChange = (newValue: string) => {
+        setInputMins(parseInt(newValue));
+    };
+    const handleSecsChange = (newValue: string) => {
+        setInputSecs(parseInt(newValue));
+    };
+
+    useEffect(() => {
+        setTotalSecs((inputMins * 60) + inputSecs);
+    }, [inputMins, inputSecs]);
+
+
+    const getMins = (totalSeconds: number) => {
+        return Math.floor(totalSeconds / 60);
+    };
+
+    const getSecs = (totalSeconds: number) => {
+        return (totalSeconds % 60);
+    }
+
+    const updateTime = (newValue: string) => {
+        setEditingMins(false);
+        setEditingSecs(false);
+        // Set the total time
+        let totalSecs = (inputMins * 60) + inputSecs
+        setTotalSecs(totalSecs);
+        props.onChange(totalSecs.toString());
+        // Update the input mins + secs to the 'normalized', confirmed values.
+        setInputMins(getMins(totalSecs));
+        setInputSecs(getSecs(totalSecs));
+    }
 
     return (
         <span>
-        <input type='number'
-               disabled={props.enabled}
-               value={props.value.toString()}
-               onChange={handleChange}
-               min={0}/>
-        </span>
+{/* total secs = {totalSecs}
+value = {props.value} */}
+               <EditableText type="number"
+                             disabled={props.enabled}
+                             onConfirm={updateTime}
+                             onChange={handleMinsChange}
+                             maxLength={2}
+                             value={editingMins ? inputMins.toString() : getMins(props.secsRemaining).toString()}
+                             onEdit={() => {setEditingMins(true)}}
+                             onCancel={() => {setEditingMins(false)}}
+                /> 
+                : 
+                <EditableText type="number"
+                             disabled={props.enabled}
+                             onConfirm={updateTime}
+                             onChange={handleSecsChange}
+                             maxLength={2}
+                             value={editingSecs ? inputSecs.toString() : getSecs(props.secsRemaining).toString()}
+                             onEdit={() => {setEditingSecs(true)}}
+                             onCancel={() => {setEditingSecs(false)}}
+                /> 
+        </span> 
     );
 }
