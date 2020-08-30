@@ -8,7 +8,7 @@ import NumberFormat from 'react-number-format'
 export interface IProps  {
     initialTime: number,
     running: boolean,
-    className: string,
+    className?: string,
     onComplete: () => void,
     cleanup: () => void,
 };
@@ -68,7 +68,7 @@ export class Timer extends React.Component<IProps, IState> {
 
     render() {
         return (
-            <div className={this.props.className}>
+            <div className={this.props.className ?? ""}>
                 <div>
                 <TimerEditableText secsRemaining={this.state.timeRemaining}
                                    enabled={this.state.isRunning}
