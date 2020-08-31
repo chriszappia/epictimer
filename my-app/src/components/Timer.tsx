@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { EditableText } from '@blueprintjs/core'
+import './Timer.css';
 
 // TODOs
 // onTick callback
@@ -133,7 +134,7 @@ export function TimerEditableText(props: ITimerEditableTextProps) {
     }
 
     return (
-        <span>
+        <span className="timer">
                <EditableText type="number"
                              disabled={props.enabled}
                              onConfirm={updateTime}
