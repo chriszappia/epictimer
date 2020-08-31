@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { EditableText } from '@blueprintjs/core'
-import NumberFormat from 'react-number-format'
 
 // TODOs
 // onTick callback
-// onComplete callback
 export interface IProps  {
     initialTime: number,
     running: boolean,
@@ -128,7 +126,7 @@ export function TimerEditableText(props: ITimerEditableTextProps) {
 
     const getSecsString = () => {
         let str = getSecs(props.secsRemaining).toString()
-        if (str.length == 1) {
+        if (str.length === 1) {
             str = "0" + str;
         }
         return str;

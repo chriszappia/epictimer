@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { Timer } from './components/Timer';
-import { TimerCanvas } from './components/TimerCanvas';
 import { PostTimerAction } from './PostTimerActions/PostTimerAction';
 import { FlashAction } from './PostTimerActions/FlashAction/Flash';
 import { FlashAction2 } from './PostTimerActions/FlashAction/Flash2';
