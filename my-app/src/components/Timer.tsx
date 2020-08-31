@@ -89,7 +89,6 @@ export class Timer extends React.Component<IProps, IState> {
 export interface ITimerEditableTextProps {
     secsRemaining: number,
     enabled: boolean,
-    // TODO update this to number func
     updateTimer(newValue: number): void,
 }
 
@@ -127,10 +126,16 @@ export function TimerEditableText(props: ITimerEditableTextProps) {
         setInputSecs(getSecs(totalSecs));
     }
 
+    const getSecsString = () => {
+        let str = getSecs(props.secsRemaining).toString()
+        if (str.length == 1) {
+            str = "0" + str;
+        }
+        return str;
+    }
+
     return (
         <span>
-{/* total secs = {totalSecs}
-value = {props.value} */}
                <EditableText type="number"
                              disabled={props.enabled}
                              onConfirm={updateTime}
@@ -146,7 +151,7 @@ value = {props.value} */}
                              onConfirm={updateTime}
                              onChange={handleSecsChange}
                              maxLength={2}
-                             value={editingSecs ? inputSecs.toString() : getSecs(props.secsRemaining).toString()}
+                             value={editingSecs ? inputSecs.toString() : getSecsString()}
                              onEdit={() => {setEditingSecs(true)}}
                              onCancel={() => {setEditingSecs(false)}}
                 /> 
