@@ -11,6 +11,7 @@
     "@types/node": "^12.12.54",
     "@types/react": "^16.9.47",
     "@types/react-dom": "^16.9.8",
+    "dseg": "^0.46.0",
     "konva": "^7.0.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

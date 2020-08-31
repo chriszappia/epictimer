@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { EditableText } from '@blueprintjs/core'
+import 'dseg/css/dseg.css';
 import './Timer.css';
 
 // TODOs
