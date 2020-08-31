@@ -15,6 +15,7 @@ export interface IProps  {
 
 export interface IState {
     timeRemaining: number,
+    confirmedTime: number,
     isRunning: boolean,
 }
 
@@ -29,6 +30,7 @@ export class Timer extends React.Component<IProps, IState> {
 
         this.state = {
             timeRemaining: props.initialTime,
+            confirmedTime: props.initialTime,
             isRunning: false,
         }
         this.timer = null;
@@ -62,9 +64,13 @@ export class Timer extends React.Component<IProps, IState> {
 
     private reset = () => {
         this.stop();
-        this.setState({timeRemaining: this.props.initialTime});
+        this.setState({timeRemaining: this.state.confirmedTime});
     };
 
+    private updateTimer = (newValue: number) => {
+        this.setState({timeRemaining: newValue,
+                       confirmedTime: newValue});
+    }
 
     render() {
         return (
@@ -72,7 +78,7 @@ export class Timer extends React.Component<IProps, IState> {
                 <div>
                 <TimerEditableText secsRemaining={this.state.timeRemaining}
                                    enabled={this.state.isRunning}
-                                   updateTimer={(newValue) => {this.setState({timeRemaining: newValue})}}
+                                   updateTimer={this.updateTimer}
                 />
                 </div>
                 <div>
