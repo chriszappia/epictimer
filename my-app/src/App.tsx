@@ -20,6 +20,13 @@ function App() {
   const [currentPostTimerActionIndex, setCurrentPostTimerActionIndex] = useState<number>(randNum);
   const [postTimerElement, setPostTimerElement] = useState<JSX.Element | null>(null); 
 
+
+  const randomPostTimerAction = () => {
+    const randNum = Math.floor(Math.random() * postTimerActions.length);
+    setCurrentPostTimerAction(postTimerActions[randNum]);
+    setCurrentPostTimerActionIndex(randNum);
+  };
+
   const onTimerComplete = () => {
     setPostTimerElement(currentPostTimerAction.onTimerComplete());
   };
@@ -50,6 +57,7 @@ function App() {
               return (<option value={index.toString()}>{action.getName()}</option>)
             })}
           </select>
+          <button onClick={randomPostTimerAction}>Random</button>
         </div>
       </div>
       <div className={"full centred bottom"}>
