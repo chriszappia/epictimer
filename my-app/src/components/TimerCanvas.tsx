@@ -5,7 +5,7 @@ import Konva from 'konva';
  
 export interface IProps {
   className: string,
-};
+}
 
 export function TimerCanvas(props: IProps ) {
 

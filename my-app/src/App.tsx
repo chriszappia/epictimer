@@ -7,7 +7,7 @@ import { FlashAction2 } from './PostTimerActions/FlashAction/Flash2';
 
 
 // TODO Delete 2nd FlashAction.
-let postTimerActions: PostTimerAction[] = [new FlashAction(), new FlashAction2(),];
+const postTimerActions: PostTimerAction[] = [new FlashAction(), new FlashAction2(),];
 
 function getRandomPostTimerAction(): PostTimerAction {
   return postTimerActions[Math.floor(Math.random() * postTimerActions.length)];
@@ -34,7 +34,7 @@ function App() {
   const cleanupPostAction = () => {
     currentPostTimerAction.cleanup();
     setPostTimerElement(null);
-  }
+  };
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const valueInt = parseInt(event.target.value);
@@ -54,7 +54,7 @@ function App() {
           On Complete:
           <select onChange={handleSelectChange} value={currentPostTimerActionIndex.toString()}>
             {postTimerActions.map((action, index) => {
-              return (<option value={index.toString()}>{action.getName()}</option>)
+              return (<option value={index.toString()}>{action.getName()}</option>);
             })}
           </select>
           <button onClick={randomPostTimerAction}>Random</button>
