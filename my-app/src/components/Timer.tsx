@@ -72,7 +72,7 @@ export class Timer extends React.Component<IProps, IState> {
                        confirmedTime: newValue});
     };
 
-    render() {
+    render(): JSX.Element {
         return (
             <div className={this.props.className ?? ""}>
                 <div>
@@ -98,7 +98,7 @@ export interface ITimerEditableTextProps {
     updateTimer(newValue: number): void,
 }
 
-export function TimerEditableText(props: ITimerEditableTextProps) {
+export function TimerEditableText(props: ITimerEditableTextProps): JSX.Element {
     // Defined early because we need them to get the initial state of input mins and secs
     const getMins = (totalSeconds: number) => {
         return Math.floor(totalSeconds / 60);

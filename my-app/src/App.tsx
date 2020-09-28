@@ -9,11 +9,7 @@ import { FlashAction2 } from './PostTimerActions/FlashAction/Flash2';
 // TODO Delete 2nd FlashAction.
 const postTimerActions: PostTimerAction[] = [new FlashAction(), new FlashAction2(),];
 
-function getRandomPostTimerAction(): PostTimerAction {
-  return postTimerActions[Math.floor(Math.random() * postTimerActions.length)];
-}
-
-function App() {
+function App(): JSX.Element {
 
   const randNum = Math.floor(Math.random() * postTimerActions.length);
   const [currentPostTimerAction, setCurrentPostTimerAction] = useState<PostTimerAction>(postTimerActions[randNum]);
