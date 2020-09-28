@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { EditableText } from '@blueprintjs/core'
+import { EditableText } from '@blueprintjs/core';
 import 'dseg/css/dseg.css';
 import './Timer.css';
 
@@ -11,7 +11,7 @@ export interface IProps  {
     className?: string,
     onComplete: () => void,
     cleanup: () => void,
-};
+}
 
 export interface IState {
     timeRemaining: number,
@@ -32,7 +32,7 @@ export class Timer extends React.Component<IProps, IState> {
             timeRemaining: props.initialTime,
             confirmedTime: props.initialTime,
             isRunning: false,
-        }
+        };
         this.timer = null;
     }
 
@@ -58,8 +58,8 @@ export class Timer extends React.Component<IProps, IState> {
             this.setState({isRunning: true});
             this.timer = setInterval(() => {
                 this.tick();
-            }, Timer.tickLength)
-        };
+            }, Timer.tickLength);
+        }
     };
 
     private reset = () => {
@@ -70,7 +70,7 @@ export class Timer extends React.Component<IProps, IState> {
     private updateTimer = (newValue: number) => {
         this.setState({timeRemaining: newValue,
                        confirmedTime: newValue});
-    }
+    };
 
     render() {
         return (
@@ -105,7 +105,7 @@ export function TimerEditableText(props: ITimerEditableTextProps) {
     };
     const getSecs = (totalSeconds: number) => {
         return (totalSeconds % 60);
-    }
+    };
     
     // State stuff
     const [inputMins, setInputMins] = useState<number>(getMins(props.secsRemaining));
@@ -125,20 +125,20 @@ export function TimerEditableText(props: ITimerEditableTextProps) {
         setEditingMins(false);
         setEditingSecs(false);
         // Set the total time
-        let totalSecs = (inputMins * 60) + inputSecs
+        const totalSecs = (inputMins * 60) + inputSecs;
         props.updateTimer(totalSecs);
         // Update the input mins + secs to the 'normalized', confirmed values.
         setInputMins(getMins(totalSecs));
         setInputSecs(getSecs(totalSecs));
-    }
+    };
 
     const getSecsString = () => {
-        let str = getSecs(props.secsRemaining).toString()
+        let str = getSecs(props.secsRemaining).toString();
         if (str.length === 1) {
             str = "0" + str;
         }
         return str;
-    }
+    };
 
     return (
         <span className="timer">
@@ -148,8 +148,8 @@ export function TimerEditableText(props: ITimerEditableTextProps) {
                              onChange={handleMinsChange}
                              maxLength={2}
                              value={editingMins ? inputMins.toString() : getMins(props.secsRemaining).toString()}
-                             onEdit={() => {setEditingMins(true)}}
-                             onCancel={() => {setEditingMins(false)}}
+                             onEdit={() => {setEditingMins(true);}}
+                             onCancel={() => {setEditingMins(false);}}
                 /> 
                 : 
                 <EditableText type="number"
@@ -158,8 +158,8 @@ export function TimerEditableText(props: ITimerEditableTextProps) {
                              onChange={handleSecsChange}
                              maxLength={2}
                              value={editingSecs ? inputSecs.toString() : getSecsString()}
-                             onEdit={() => {setEditingSecs(true)}}
-                             onCancel={() => {setEditingSecs(false)}}
+                             onEdit={() => {setEditingSecs(true);}}
+                             onCancel={() => {setEditingSecs(false);}}
                 /> 
         </span> 
     );
