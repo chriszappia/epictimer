@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { PostTimerAction } from "../PostTimerAction";
 import Confetti from 'react-confetti';
 
-export class ParticleRainAction extends PostTimerAction {
+export class ConfettiAction extends PostTimerAction {
     private timer: NodeJS.Timeout | null;
 
     constructor() {
@@ -12,7 +12,7 @@ export class ParticleRainAction extends PostTimerAction {
 
     onTimerComplete(): JSX.Element {
         return (
-            <ConfettiAction/>
+            <EpicConfetti/>
         );
     }
 
@@ -20,7 +20,7 @@ export class ParticleRainAction extends PostTimerAction {
     }
 }
 
-export function ConfettiAction() : JSX.Element {
+export function EpicConfetti() : JSX.Element {
     const [currentColour, setCurrentColour] = useState<string>('yellow');
 
     useEffect(() => {

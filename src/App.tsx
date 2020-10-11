@@ -4,11 +4,11 @@ import { Timer } from './components/Timer';
 import { PostTimerAction } from './PostTimerActions/PostTimerAction';
 import { FlashAction } from './PostTimerActions/FlashAction/Flash';
 import { FlashAction2 } from './PostTimerActions/FlashAction/Flash2';
-import {ParticleRainAction} from "./PostTimerActions/ConfettiAction/Confetti";
+import {ConfettiAction} from "./PostTimerActions/ConfettiAction/Confetti";
 
 
 // TODO Delete 2nd FlashAction.
-const postTimerActions: PostTimerAction[] = [new FlashAction(), new FlashAction2(), new ParticleRainAction()];
+const postTimerActions: PostTimerAction[] = [new FlashAction(), new FlashAction2(), new ConfettiAction()];
 
 function App(): JSX.Element {
 
