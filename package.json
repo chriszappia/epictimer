@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@blackbox-vision/react-particles": "^1.2.0",
     "@blueprintjs/core": "^3.31.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -14,10 +15,12 @@
     "dseg": "^0.46.0",
     "konva": "^7.0.6",
     "react": "^16.13.1",
+    "react-confetti": "^6.0.0",
     "react-dom": "^16.13.1",
     "react-konva": "^16.13.0-6",
     "react-number-format": "^4.4.1",
-    "react-scripts": "^3.4.3"
+    "react-scripts": "^3.4.3",
+    "typescript": "^3.9.7"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -45,7 +48,6 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.2.0",
     "@typescript-eslint/parser": "^4.2.0",
-    "eslint": "^6.6.0",
-    "typescript": "^3.9.7"
+    "eslint": "^6.6.0"
   }
 }
