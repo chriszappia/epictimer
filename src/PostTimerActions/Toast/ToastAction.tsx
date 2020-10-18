@@ -59,7 +59,6 @@ export function ToastDiv(props: IToastDivProps) {
               intent: intents[Math.floor(Math.random() * intents.length)]
           };
           props.toasters[Math.floor(Math.random() * props.toasters.length)].show(toastProps);
-        //   setCurrentToasterIndex(current => current + 1 > props.toasters.length ? current + 1 : 0);
         }, 200);
       return () => {
           // Cleanup
