@@ -4,11 +4,15 @@ import { Timer } from './components/Timer';
 import { PostTimerAction } from './PostTimerActions/PostTimerAction';
 import { FlashAction } from './PostTimerActions/FlashAction/Flash';
 import { FlashAction2 } from './PostTimerActions/FlashAction/Flash2';
-import {ConfettiAction} from "./PostTimerActions/ConfettiAction/Confetti";
+import { ConfettiAction } from "./PostTimerActions/ConfettiAction/Confetti";
+import { HeyeyeyeyAction } from './PostTimerActions/HeyeyeyeyAction/Heyeyeyey';
+import { ToastAction } from './PostTimerActions/Toast/ToastAction';
+
 
 
 // TODO Delete 2nd FlashAction.
-const postTimerActions: PostTimerAction[] = [new FlashAction(), new FlashAction2(), new ConfettiAction()];
+const postTimerActions: PostTimerAction[] = [new FlashAction(), new FlashAction2(),  new ConfettiAction(), new HeyeyeyeyAction(),
+new ToastAction()];
 
 function App(): JSX.Element {
 
